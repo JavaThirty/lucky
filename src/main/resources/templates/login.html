@@ -6,6 +6,28 @@
 </head>
 <body>
     <div>
-        <img src="/static/img/gou.png" />
+        <form>
+            <input name="email" type="email" /><br/>
+            <input type="button" value="获取" onclick="sendemail()" />
+        </form>
     </div>
+
+    <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script type="text/javascript">
+
+    function sendemail(){
+        var email = $("#email").val();
+        $.ajax({
+            url:"/sendcode",
+            data:{"email":email},
+            type:"get",
+            dataType:"JSON",
+            success: function (res){
+                if(res.msg==="success"){
+                    alert("成功！");
+                }
+            }
+        })
+    }
+</script>
 </body>

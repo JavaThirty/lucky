@@ -12,13 +12,11 @@ spring:
     username: 2565790896@qq.com
     password: sdjvqphyjuonebig
     default-encoding: utf-8
+    protocol: smtp
+    port: 25
     properties:
-      mail:
-        smtp:
-          auth: true
-          starttls:
-            enable: true
-            required: true
+      mail.smtp.socktFactory.class: javax.net.ssl.SSLSocktFactory
+
 mybatis:
   config-location: classpath:mybatis/mybatis-config.xml
   mapper-locations: classpath:mybatis/mapper/*.xml

@@ -1,6 +1,10 @@
 package cn.hzp.award.util;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.mail.MailException;
+import org.springframework.mail.MailSender;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
@@ -21,7 +25,6 @@ import java.util.List;
  */
 @Component
 public class MyEmail {
-    @Value("${spirng.mail.username}")
     private String from;
     @Resource
     JavaMailSender javaMailSender;
@@ -48,29 +51,22 @@ public class MyEmail {
     /**
      * 发送验证码
      * @param email 发送到
-     * @param session
+     * @param
      */
-    public void sendMail(String email, HttpSession session){
-        MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+    public Boolean sendMail(String email, HttpSession session){
+        SimpleMailMessage msg = new SimpleMailMessage();
+        msg.setFrom("2565790896@qq.com");
+        msg.setTo(email);
+        msg.setSubject("拼多多盲盒");
+        String random = achieveCode();
+        session.setAttribute("mailcode",random);
+        msg.setText("<font style='color:green'>"+random+"</font>");
         try {
-            MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage,true);
-            //设置发件人
-            mimeMessageHelper.setFrom(from);
-            //设置收件人
-            mimeMessageHelper.setTo(email);
-            //设置邮件主题
-            mimeMessageHelper.setSubject("拼多多抽奖");
-            //生成验证码
-            String random = achieveCode();
-            //将验证码放到session中
-            session.setAttribute("email",email);
-            session.setAttribute("code",random);
-            //设置验证码样式
-            mimeMessageHelper.setText("<font style='color:green'>"+random+"</font>",true);
-            javaMailSender.send(mimeMessage);
-        }catch (MessagingException e){
-            e.printStackTrace();
+            javaMailSender.send(msg);
+        }catch (MailException e){
+            System.out.println(e.getMessage());
+            return false;
         }
-
+        return true;
     }
 }
