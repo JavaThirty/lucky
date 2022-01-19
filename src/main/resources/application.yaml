@@ -7,7 +7,18 @@ spring:
   jdbc:
     template:
       query-timeout: 3
-
+  mail:
+    host: smtp.qq.com
+    username: 2565790896@qq.com
+    password: sdjvqphyjuonebig
+    default-encoding: utf-8
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
 mybatis:
   config-location: classpath:mybatis/mybatis-config.xml
   mapper-locations: classpath:mybatis/mapper/*.xml
