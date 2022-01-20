@@ -25,11 +25,9 @@ public class ItripAuthController {
     //发送验证码
     @ResponseBody
     @GetMapping("/sendcode")
-    public Map sendEmailCode(HttpSession session) {
-        //@RequestParam("email") String email,
-        //HttpSession session
+    public Map sendEmailCode(@RequestParam("email") String email,HttpSession session) {
         Map<String,Object> map = new HashMap<>();
-        if(myEmaill.sendMail("43103113@qq.com",session)){
+        if(myEmaill.sendMail(email,session)){
             map.put("msg","success");
         }else{
             map.put("msg","defeated");

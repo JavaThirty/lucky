@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册</title>2
+    <link rel="stylesheet" type="text/css" href="/css/register.css">
+</head>
+<body>
+    <div class="wai"><img src="/img/gou.png" width="100" height="80"></div>
+    <div class="wai">
+        <div class="guanggao"><img src="/img/gou.png" width="300" height="300"></div>
+        <div class="logindiv" style="height: 500px;width: 300px">
+            <form>
+                <h2>邮箱注册</h2>
+                <label>邮箱:</label>
+                <input type="email" name="email" id="email" value="" /><br/><br/>
+                <label>密码:</label>
+                <input type="password" name="password" id="password" value="" /><br/><br/>
+                <label>确认密码:</label>
+                <input type="password" name="repwd" id="repwd" value="" /><br/><br/>
+                <label>邮箱验证码:</label>
+                <input type="password" name="mailcode" id="mailcode" value="" />
+                <input type="button" name="getcode" value="发送" onclick="sendemail()" />
+                <br/><br/>
+                <label>邀请码(可选):</label>
+                <input type="password" name="invitecode" id="invitecode" value="" /><br/><br/>
+
+                <input type="button" name="register" value="注册" />
+                <input type="button" name="login" value="登录" />
+            </form>
+        </div>
+    </div>
+    <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript">
+
+        function sendemail(){
+            var email = $("#email").val();
+            alert(email);
+            $.ajax({
+                url:"/sendcode",
+                data:{"email":email},
+                type:"get",
+                dataType:"JSON",
+                success: function (res){
+                    if(res.msg==="success"){
+                        alert("成功！");
+                    }
+                }
+            })
+        }
+    </script>
+</body>
+</html>

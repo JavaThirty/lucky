@@ -9,8 +9,8 @@ spring:
       query-timeout: 3
   mail:
     host: smtp.qq.com
-    username: 2565790896@qq.com
-    password: sdjvqphyjuonebig
+    username: 366016247@qq.com
+    password: zgaeobpguhrqbhcd
     default-encoding: utf-8
     protocol: smtp
     port: 25

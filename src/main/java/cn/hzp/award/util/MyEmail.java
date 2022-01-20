@@ -55,12 +55,12 @@ public class MyEmail {
      */
     public Boolean sendMail(String email, HttpSession session){
         SimpleMailMessage msg = new SimpleMailMessage();
-        msg.setFrom("2565790896@qq.com");
+        msg.setFrom("366016247@qq.com");
         msg.setTo(email);
-        msg.setSubject("拼多多盲盒");
+        msg.setSubject("盲盒注册验证码");
         String random = achieveCode();
         session.setAttribute("mailcode",random);
-        msg.setText("<font style='color:green'>"+random+"</font>");
+        msg.setText(random);
         try {
             javaMailSender.send(msg);
         }catch (MailException e){

@@ -17,6 +17,7 @@ public class ToController {
     public String toZhuce(){
         return "register";
     }
+
     @GetMapping("/login")
     public String towelcom(Model model){
         return "login";
