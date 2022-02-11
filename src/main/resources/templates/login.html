@@ -17,7 +17,7 @@
                 <label>密码:</label>
                 <input type="password" name="pwd" id="pwd" value="" /><br/><br/>
                 <input type="button" name="register" value="注册" onclick="toregister()" />
-                <input type="button" name="login" value="登录" />
+                <input type="button" name="login" onclick="loginto()" value="登录" />
             </form>
         </div>
     </div>
@@ -26,6 +26,28 @@
 <script type="text/javascript">
     function toregister(){
         window.location.href="/register";
+    }
+
+    function loginto(){
+        var email = $("#email").val();
+        var pwd = $("#pwd").val();
+        $.ajax({
+            "url": "/login",
+            "type": "post",
+            "data": {"email": email,"pwd":pwd},
+            "dataType": "json",
+            success: function (result) {
+                if(result.flag==true){
+                    alert(result.flag);
+                    window.location.href="/index";
+                }else{
+                    alert("账户或密码信息错误");
+                }
+            },
+            error: function () {
+                alert("请联系客服！")
+            }
+        })
     }
 </script>
 </body>

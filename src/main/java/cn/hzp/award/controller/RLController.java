@@ -2,7 +2,6 @@ package cn.hzp.award.controller;
 
 import cn.hzp.award.pojo.User;
 import cn.hzp.award.service.user.UserService;
-import cn.hzp.award.util.MyEmail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,7 +23,6 @@ import java.util.Map;
 public class RLController {
     @Autowired
     UserService userService;
-
     //注册
     @ResponseBody
     @PostMapping("/register")
@@ -46,6 +44,7 @@ public class RLController {
         user.setPassword(pwd);
         User u = userService.login(user);
         if(u!=null){
+            session.setAttribute("loginuser",u);
             map.put("flag","true");
         }else{
             map.put("flag","false");

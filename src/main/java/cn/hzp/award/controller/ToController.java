@@ -23,4 +23,8 @@ public class ToController {
         return "login";
     }
 
+    @GetMapping("/index")
+    public String toIndex(Model model){
+        return "index";
+    }
 }
